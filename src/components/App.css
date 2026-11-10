@@ -1,184 +1,253 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
+/* ---------- Colors and basic settings ----------
+   Variables let us define each color once and reuse it everywhere.
+   To change the look of the whole app, edit these values. */
+:root {
+  --bg: #f8f5fc;          /* page background: pale lavender-ivory */
+  --surface: #fffefb;     /* cards and text boxes */
+  --surface-alt: #eee8f6; /* form card and search strip: soft lilac */
+  --ink: #2a1650;         /* main text and the header: deep royal purple */
+  --muted: #5f5675;       /* softer text, like descriptions */
+  --border: #d9cfe8;      /* thin, soft borders */
+  --accent: #5b2a9d;      /* royal purple: button, focus, highlights */
+  --accent-dark: #43207a; /* darker purple for hover */
+  --accent-soft: #ece4f8; /* soft lavender for image placeholders */
+  --gold: #c9a227;        /* royal gold: stripe under the header */
+  --error: #b42318;       /* error messages */
 
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+  --radius: 12px;
+  --shadow: 0 1px 2px rgba(42, 22, 80, 0.08), 0 6px 16px rgba(42, 22, 80, 0.08);
+
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink);
+  line-height: 1.5;
 }
 
-.hero {
-  position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
+/* Make width and height include padding and borders (easier sizing) */
+* {
+  box-sizing: border-box;
 }
 
-#center {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
+body {
+  margin: 0;
+  background: var(--bg);
 }
 
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
+/* ---------- Header ---------- */
+.app-header {
+  background: var(--ink);
+  color: var(--bg);
+  border-bottom: 3px solid var(--gold);
+  padding: 1.25rem 1rem;
+  text-align: center;
 }
 
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
+.app-header h1 {
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  /* clamp(min, preferred, max): the title shrinks on small screens */
+  font-size: clamp(1.4rem, 4vw, 2rem);
 }
 
-#next-steps ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
+/* ---------- Page layout ---------- */
+/* One centered column that is never wider than 720px */
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  display: grid;
+  gap: 1.5rem; /* space between the two cards */
 }
 
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
+/* Shared style for both cards: soft border and a light shadow */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden; /* keeps the search strip inside the rounded corners */
 }
 
-.ticks {
-  position: relative;
+/* ---------- Add Project form ---------- */
+.form-card {
+  background: var(--surface-alt);
+  padding: 1.5rem;
+}
+
+.form-card h2 {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.form-field {
+  display: grid;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.form-field label {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Shared look for text boxes and the button */
+input,
+textarea,
+button {
+  font: inherit; /* use the same font as the rest of the page */
+  border-radius: 8px;
+}
+
+.form-field input,
+.form-field textarea,
+.search-bar input {
   width: 100%;
+  padding: 0.65rem 0.8rem;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid #cbbfdf;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
+.form-field textarea {
+  resize: vertical; /* the user can only stretch it up and down */
+}
+
+/* When a box is clicked or tabbed into: purple border and a soft glow */
+.form-field input:focus,
+.form-field textarea:focus,
+.search-bar input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(91, 42, 157, 0.25);
+}
+
+button {
+  padding: 0.65rem 2.5rem;
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+button:hover {
+  background: var(--accent-dark);
+}
+
+/* A clear outline for keyboard users on the button */
+button:focus-visible {
+  outline: 3px solid rgba(91, 42, 157, 0.4);
+  outline-offset: 2px;
+}
+
+.form-error {
+  margin: 0 0 1rem;
+  color: var(--error);
+  font-weight: 600;
+}
+
+/* ---------- Search bar ---------- */
+.search-bar {
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem;
+}
+
+/* ---------- Project list ---------- */
+.project-list {
+  list-style: none; /* remove the bullet points */
+  margin: 0;
+  padding: 0.5rem 1rem;
+}
+
+/* Each project: image on the left, text on the right */
+.project-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--surface-alt);
+}
+
+.project-card:last-child {
+  border-bottom: none;
+}
+
+/* The square placeholder with an X */
+.project-image {
+  flex: 0 0 auto; /* never shrink or grow */
+  width: 88px;
+  height: 88px;
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.project-image svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.project-image line {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke; /* keeps the line thin when stretched */
+}
+
+.project-info h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.project-info p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Message shown when the search finds nothing */
+.empty-state {
+  margin: 0;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* ---------- Tablets and small screens ---------- */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem 0.75rem 2rem;
+  }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 480px) {
+  .form-card {
+    padding: 1rem;
   }
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
+  /* Smaller picture box and title so the text has more room */
+  .project-image {
+    width: 64px;
+    height: 64px;
   }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
+
+  .project-card {
+    gap: 0.85rem;
+  }
+
+  .project-info h3 {
+    font-size: 1.15rem;
+  }
+
+  /* Full-width button is easier to tap */
+  button {
+    width: 100%;
   }
 }

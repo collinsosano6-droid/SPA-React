@@ -2,10 +2,10 @@
 import { useState } from "react";
 
 // Import the other components and the starting data
-import Header from "./components/Header";
-import ProjectForm from "./components/ProjectForm";
-import ProjectsPanel from "./components/ProjectsPanel";
-import { initialProjects } from "./data";
+import Header from "./Header";
+import ProjectForm from "./ProjectForm";
+import ProjectsPanel from "./ProjectsPanel";
+import { initialProjects } from "../data";
 
 // Import the styles
 import "./App.css";
