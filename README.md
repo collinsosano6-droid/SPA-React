@@ -4,7 +4,7 @@ A small website built with **React** that shows a list of projects. You can add
 new projects with a form and search through them as you type. The page adjusts
 to fit phones, tablets, and computers.
 
-## Features
+## Features:
 
 - **Project list:** shows each project with an image placeholder, a title, and a description
 - **Add a project:** fill in a title and description, then click **Add**
@@ -12,7 +12,7 @@ to fit phones, tablets, and computers.
 - **Responsive design:** works on small and large screens
 - **Tests:** automated tests check that the main features work
 
-## Built with
+## Built with:
 
 - [React](https://react.dev/) (using functional components and the `useState` hook)
 - [Vite](https://vitejs.dev/) to run the project
