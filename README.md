@@ -53,21 +53,6 @@ You need [Node.js](https://nodejs.org/) installed on your computer.
   only projects whose title or description matches. If nothing matches, you will
   see a message saying so.
 
-## Running the tests
-
-1. Install the testing tools (you only need to do this once):
-
-   ```bash
-   npm install -D jest jest-environment-jsdom babel-jest @babel/core \
-     @babel/preset-env @babel/preset-react @testing-library/react \
-     @testing-library/jest-dom @testing-library/user-event
-   ```
-
-2. Open `package.json` and add a test script inside `"scripts"`:
-
-   ```json
-   "test": "jest"
-   ```
 
 
 ## Project structure
