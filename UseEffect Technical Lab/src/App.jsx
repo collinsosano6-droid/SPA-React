@@ -16,6 +16,20 @@ function App() {
     .catch(error =>console.error(`Error fetching user:`,error))
   }, [])
 
+  useEffect(()=>{
+    const handleWindowClick = ()=>{
+      console.log ("Window was clicked")
+    };
+
+    //Add event listener
+    window.addEventListener("click", handleWindowClick)
+
+    //Remove event listener
+    return ()=>{
+      window.removeEventListener("click", handleWindowClick)
+    }
+  }, []);
+
   return (
     <div>
       <h1>Hello, {userName}!</h1>
